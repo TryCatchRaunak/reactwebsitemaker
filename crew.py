@@ -7,7 +7,7 @@ load_dotenv()
 
 
 input_file_read = FileReadTool("/home/trycatchraunak/PycharmProjects/websitemaker/src/websitemaker/SDD.txt")
-input_file_read2 = FileReadTool("/home/trycatchraunak/PycharmProjects/websitemaker/src/websitemaker/components.txt")
+input_file_read2 = FileReadTool("/home/trycatchraunak/PycharmProjects/websitemaker/src/websitemaker/sample/components.txt")
 code_search_tool = ScrapeWebsiteTool("https://react.dev/")
 
 
