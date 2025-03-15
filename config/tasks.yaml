@@ -1,0 +1,73 @@
+sdd_reading_task:
+  description: >
+    Thoroughly read and analyze the Software Design Document (SDD) to extract all relevant information required for the website development process.
+    This includes understanding the overall architecture, design patterns, data models, user interactions, and any specific requirements or constraints mentioned in the SDD.
+    Ensure that all critical details are captured accurately to facilitate the subsequent stages of the project.
+  expected_output: >
+    - A comprehensive list of all the information extracted from the SDD document.
+    - Detailed notes on the architecture, design patterns, data models, user interactions, and specific requirements or constraints.
+    - Clear and organized documentation that can be easily referenced by other team members.
+  agent: sdd_reader
+
+website_components_deciding_task:
+  description: >
+    Analyze the extracted information provided by the sdd_reader agent to identify and list all the components required for the website.
+    This includes determining the necessary UI components, their interactions, data flow, and any dependencies between components.
+    Provide a detailed breakdown of each component, including its purpose, functionality, and any specific design considerations.
+  expected_output: >
+    - A detailed list of all the components required for the website, including their purpose and functionality.
+    - A brief description of each component, including its interactions, data flow, and dependencies.
+    - A well-organized document that outlines the design and structure of the website components, ensuring clarity and ease of implementation.
+  agent: website_components_decider
+
+frontend_development_task:
+  description: >
+    Generate high-quality, scalable React components based on the webpage requirement list.
+    Ensure components follow best practices, maintainability, and performance optimization.
+    Read and incorporate all components and their respective subtopics (such as logic for username, password, validation, form handling, etc.) mentioned in the web_requirement document while coding.
+    Each component should be structured to include necessary functionality, such as:
+    - UI structure
+    - State management (e.g., controlled inputs, form handling)
+    - API integration (if applicable)
+    - Event handling (e.g., form submission, button clicks)
+    - UI/UX enhancements (e.g., animations, responsive design)
+    - Validation and error handling
+    Components should be modular and placed in their own dedicated .jsx files.
+    The logic, hooks, and necessary state management should be integrated within the component files based on their assigned job from the webpage requirement list.
+    Remember you will also have to use Tailwindcss for styling your components.
+  expected_output: >
+    - Fully functional and reusable React components with integrated logic and subtopics.
+    - Optimized and structured code following React best practices.
+    - Well-integrated components that align with project requirements and sub-requirements.
+    - Efficient state management, event handling, and API calls as per component needs.
+    - Responsive and accessible UI components with proper styling.
+    - Each component adheres to the specifications outlined in the web_requirement document.
+    - Make sure to create all the .jsx files inside src/components folder. Create it if needed.
+    - Each component is saved as a separate .jsx file, containing both UI structure and logic based on its defined subtopics.
+  agent: frontend_developer
+
+invoking_task:
+  description:
+    Invoke and integrate all the component files into the App.jsx file and handle the main.jsx file as required for the project to run successfully.
+    Ensure that all components are correctly imported and rendered within the App.jsx file.
+    The components will be created by the frontend_developer agent in the src/components folder 
+    of the pre-created ViteJS project, so ensure that the components are correctly called from this location.
+    Handle any additional configurations or setup needed in the main.jsx file to support the project's functionality.
+  expected_output: >
+    - All component files successfully imported and rendered within the App.jsx file.
+    - Proper integration of components to ensure the website functions as intended.
+    - Correct handling of any configurations or setup in the main.jsx file to support project functionality.
+    - A functional website that displays all components and features as specified in the web_requirement document.
+  agent: invoker_agent
+
+reviewing_task:
+  description: >
+    Review all the .jsx files created by the frontend_developer agent to ensure they are free of errors, follow best practices, and meet project requirements.
+    Check for syntax errors, logical inconsistencies, code readability, and adherence to coding standards.
+    Provide feedback and suggestions for improvement where necessary to enhance the overall quality of the codebase.
+  expected_output: >
+    - A detailed review of all .jsx files, highlighting any errors, inconsistencies, or areas for improvement.
+    - Feedback on code quality, readability, and adherence to best practices.
+    - Suggestions for enhancing code efficiency, maintainability, and performance.
+    - Ensuring that all components are correctly implemented and aligned with the project requirements.
+  agent: reviewer_agent
