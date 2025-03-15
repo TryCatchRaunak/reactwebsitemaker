@@ -98,8 +98,20 @@ class Websitemaker():
 		"""Creates the Websitemaker crew"""
 
 		return Crew(
-			agents=self.agents,
-			tasks=self.tasks,
+			agents=[
+				self.sdd_reader(),
+				self.wesbite_components_decider(),
+				self.frontend_developer(),
+				self.invoker_agent(),
+				self.reviewer_agent(),
+			],
+			tasks=[
+				self.sdd_reading_task(),
+				self.website_components_deciding_task(),
+				self.frontend_development_task(),
+				self.invoking_task(),
+				self.reviewing_task(),
+			],
 			process=Process.sequential,
 			verbose=True,
 		)
