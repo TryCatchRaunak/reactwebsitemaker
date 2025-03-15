@@ -10,6 +10,9 @@ from crew import Websitemaker
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 
+os.system('python pdf_to_txt.py')
+
+
 def setup():
     os.system('npm create vite@latest sample --template react-js')
     os.chdir('sample')
@@ -25,10 +28,8 @@ def run():
     """
     Run the crew.
     """
-    try:
-        Websitemaker().crew().kickoff()
-    except Exception as e:
-        raise Exception(f"An error occurred while running the crew: {e}")
+
+    Websitemaker().crew().kickoff()
 
 
 setup()
