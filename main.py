@@ -25,10 +25,6 @@ def deploy():
     os.system('npm run dev')
 
 def run():
-    """
-    Run the crew.
-    """
-
     Websitemaker().crew().kickoff()
 
 

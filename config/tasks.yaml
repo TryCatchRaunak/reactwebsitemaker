@@ -18,11 +18,17 @@ website_components_deciding_task:
     - A detailed list of all the components required for the website, including their purpose and functionality.
     - A brief description of each component, including its interactions, data flow, and dependencies.
     - A well-organized document that outlines the design and structure of the website components, ensuring clarity and ease of implementation.
+    - Mainly ensure you simply list all the components required for the website or else the frontenc developer won't create 
+      every file which will make a poor website. So make sure to list all the components in bullets. After you do this
+      then maybe you can add small subtopics and descriptions to those components.
   agent: website_components_decider
 
 frontend_development_task:
   description: >
     Generate high-quality, scalable React components based on the webpage requirement list.
+    Ensure you create each component as a separate .jsx file and integrate the necessary logic and functionality as per the requirements.
+    You should read the component list thoroughly and create components based on the specified topics and subtopics, adhering to the small descriptions provided there.
+    Do not miss any component or else the website will be poor and incomplete.
     Ensure components follow best practices, maintainability, and performance optimization.
     Read and incorporate all components and their respective subtopics (such as logic for username, password, validation, form handling, etc.) mentioned in the web_requirement document while coding.
     Each component should be structured to include necessary functionality, such as:
@@ -35,6 +41,18 @@ frontend_development_task:
     Components should be modular and placed in their own dedicated .jsx files.
     The logic, hooks, and necessary state management should be integrated within the component files based on their assigned job from the webpage requirement list.
     Remember you will also have to use Tailwindcss for styling your components.
+     - While adding styles using the Tailwindcss remember few points:
+        1. Whenever there is a white background and in any section or div or whatever, if a text exits, use a contrast color 
+            for the text so that it is easily readable or vice versa.
+        2. For buttons use rounded corners and a shadow to make them look more attractive.
+        3. For input fields, use a border and a shadow to make them look more attractive.
+        4. For link tags or anchor tags, use some animations so that they don't turn purple after one click.
+        5. Use proper alignments for each and every component.
+        6. Use proper padding and margin for each and every component.
+        7. Use proper font styles, font sizes and colors for texts.
+        8. Use proper background colors for each and every component.
+    Since you will be reading a list of components make sure you create all the .jsx files inside src/components folder and
+    and carefully and precisely route them to the App.jsx file.
   expected_output: >
     - Fully functional and reusable React components with integrated logic and subtopics.
     - Optimized and structured code following React best practices.
@@ -47,17 +65,40 @@ frontend_development_task:
   agent: frontend_developer
 
 invoking_task:
-  description:
+  description: >
     Invoke and integrate all the component files into the App.jsx file and handle the main.jsx file as required for the project to run successfully.
     Ensure that all components are correctly imported and rendered within the App.jsx file.
     The components will be created by the frontend_developer agent in the src/components folder 
     of the pre-created ViteJS project, so ensure that the components are correctly called from this location.
     Handle any additional configurations or setup needed in the main.jsx file to support the project's functionality.
+    Since we are using Tailwindcss for styling, so in order to use it make sure to add some lines in some particular files
+    without touching the other content of the files  - 
+    1. In vite.config.js file which will be located inside the src folder of the ViteJS project, overwrite 
+        the following file with these lines of code:
+              - import { defineConfig } from 'vite'
+                import tailwindcss from '@tailwindcss/vite'
+                export default defineConfig({
+                  plugins: [
+                    react(),
+                    tailwindcss(),
+                  ],
+                })
+    2. In index.css and App.css files which will be located inside the src folder of the ViteJS project, 
+        add the following lines of code WITHOUT DELETING THE EXISTING CODE (just add them above everything):
+              - @import "tailwindcss";
+                @tailwind base;
+                @tailwind components;
+                @tailwind utilities;
+    Since you will be reading a list of components make sure you create all the .jsx files inside src/components folder and
+    and carefully and precisely route them to the App.jsx file.
   expected_output: >
     - All component files successfully imported and rendered within the App.jsx file.
     - Proper integration of components to ensure the website functions as intended.
     - Correct handling of any configurations or setup in the main.jsx file to support project functionality.
     - A functional website that displays all components and features as specified in the web_requirement document.
+    - Ensure that the Tailwindcss is properly integrated into the project by adding the necessary lines of code in the specified files.
+    - The website must be dynamic and responsive and all the components must be called and each Page must have navigation routes
+      to other pages.
   agent: invoker_agent
 
 reviewing_task:

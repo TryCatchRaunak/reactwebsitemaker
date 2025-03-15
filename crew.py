@@ -1,6 +1,9 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import FileReadTool, FileWriterTool, ScrapeWebsiteTool
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 input_file_read = FileReadTool("/home/trycatchraunak/PycharmProjects/websitemaker/src/websitemaker/SDD.txt")
@@ -27,7 +30,7 @@ class Websitemaker():
 		)
 	
 	@agent
-	def wesbite_components_decider(self) -> Agent:
+	def website_components_decider(self) -> Agent:
 		return Agent(
 			config=self.agents_config['website_components_decider'],
 			tools=[FileWriterTool()],
@@ -46,7 +49,7 @@ class Websitemaker():
 	def invoker_agent(self) -> Agent:
 		return Agent(
 			config=self.agents_config['invoker_agent'],
-			tools=[input_file_read2,FileWriterTool()],
+			tools=[input_file_read2, FileWriterTool()],
 			verbose=True
 		)
 	
@@ -90,7 +93,7 @@ class Websitemaker():
 	def reviewing_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['reviewing_task'],
-			output_file1='review.txt',
+			output_file='review.txt',
 		)
 
 	@crew
@@ -100,7 +103,7 @@ class Websitemaker():
 		return Crew(
 			agents=[
 				self.sdd_reader(),
-				self.wesbite_components_decider(),
+				self.website_components_decider(),
 				self.frontend_developer(),
 				self.invoker_agent(),
 				self.reviewer_agent(),
