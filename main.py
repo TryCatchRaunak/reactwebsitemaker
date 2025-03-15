@@ -22,6 +22,7 @@ def setup():
 
 
 def deploy():
+    os.chdir('sample')
     os.system('npm run dev')
 
 def run():
